@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 6f;
 
+    [SerializeField] private ParticleSystem moveParticles;
     private Rigidbody rb;
     private Vector2 moveInput;
     private bool isJumping;
@@ -19,6 +20,18 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        if (rb.linearVelocity.sqrMagnitude > 1f && moveParticles is not null)
+        {
+            if (!moveParticles.isPlaying) moveParticles.Play();
+        }
+        else
+        {
+            if (moveParticles?.isPlaying ?? false) moveParticles.Stop();
+        }
     }
 
     public void OnMove(InputAction.CallbackContext value)

@@ -6033,6 +6033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 6
+  moveParticles: {fileID: 322411262}
   groundCheckDistance: 1.1
   groundLayer:
     serializedVersion: 2
