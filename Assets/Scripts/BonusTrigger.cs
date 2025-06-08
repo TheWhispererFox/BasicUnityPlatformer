@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class BonusTrigger : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Animator animator;
+    private readonly static int isInside = Animator.StringToHash("IsInside");
+
+    private void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+            animator.SetBool(isInside, true);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            animator.SetBool(isInside, false);
     }
 }
+
